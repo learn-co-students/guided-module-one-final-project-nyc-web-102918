@@ -12,9 +12,9 @@ def get_character_from_api(character_name)
       if info["name"] == character_name
       end
 
-binding.pry
+# binding.pry
 0
   end
 end
-binding.pry
+# binding.pry
 0
