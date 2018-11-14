@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 20181113222340) do
   end
 
   create_table "characters", force: :cascade do |t|
-    t.string  "name"
-    t.boolean "alive"
-    t.string  "species"
-    t.string  "gender"
+    t.string "name"
+    t.string "status"
+    t.string "species"
+    t.string "gender"
   end
 
   create_table "episodes", force: :cascade do |t|
