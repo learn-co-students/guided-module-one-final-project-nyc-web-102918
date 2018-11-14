@@ -5,41 +5,39 @@ require 'pry'
 # episodes = RestClient.get('https://rickandmortyapi.com/api/episode')
 # character_hash = JSON.parse(episodes)
 
- page = 1
-2.times do |page|
-  response = RestClient.get("https://rickandmortyapi.com/api/episode/?page=#{page}")
+
+2.times do |x|
+  response = RestClient.get("https://rickandmortyapi.com/api/episode/?page=#{x+1}")
   episode_hash = JSON.parse(response)
-  episode_hash["results"].each do |episode|
-    Episode.create(name: episode["name"], episode: episode["episode"])
+  episode_hash["results"].each do |episode_results|
+    Episode.create(name: episode_results["name"], episode: episode_results["episode"])
     # episode["characters"].each do |character_url|
     #   character_hash = JSON.parse(RestClient.get(character_url))
     #   Episode.update(character: character_hash["name"])
     # end
   end
 
-  page += 1
 #   # if page["info"]["next"] != ""
 #   #   page.save
 #   # else
 #   #   break
 #   # end
 end
-page = 1
-2.times do |page|
- response = RestClient.get("https://rickandmortyapi.com/api/character/?page=#{page}")
+
+25.times do |x|
+ response = RestClient.get("https://rickandmortyapi.com/api/character/?page=#{x+1}")
  character_hash = JSON.parse(response)
  character_hash["results"].each do |character|
-   Episode.create(name: character["name"], alive: character["status"], species: character["species"], :gender character["gender"])
+   Character.create(name: character["name"], status: character["status"], species: character["species"], gender: character["gender"])
    # episode["characters"].each do |character_url|
    #   character_hash = JSON.parse(RestClient.get(character_url))
    #   Episode.update(character: character_hash["name"])
    # end
  end
 
- page += 1
 
 end
 # page2 = RestClient.get(character_hash["info"]["next"])
 # new_character_hash = JSON.parse(page2)
-binding.pry
-0
+# binding.pry
+# 0
