@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20181113222340) do
   create_table "episodes", force: :cascade do |t|
     t.string "name"
     t.string "episode"
-    t.string "character_names"
   end
 
 end
