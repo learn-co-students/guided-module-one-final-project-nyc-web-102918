@@ -10,9 +10,9 @@ def command_line_list
   sleep(1)
   puts "2.) find episode by season and episode number"
   sleep(1)
-  puts "3.) find characters in a given episode"
+  puts "3.) find character info"
   sleep(1)
-  puts "4.) find characters in a given episode name"
+  puts "4.) find characters in a given episode"
   sleep(1)
   puts "5.) find episodes a character is in"
   sleep(1)
@@ -24,7 +24,7 @@ def command_line_list
   sleep(1)
   puts "9.) Exit and lose out on the adventures ahead.."
   sleep(1)
-  puts "type menu for the command list"
+  puts "type 'menu' for the command list"
 end
 
 def welcome
@@ -33,7 +33,6 @@ def welcome
   greeting
   puts "What would you like to search for?"
   sleep(2)
-  command_line_list
 end
 # def type_character_name
 #   puts "Type in character name"
@@ -48,7 +47,7 @@ def greeting
 end
 def response(user_input)
   good_responses = ["great", "awesome", "good", "bueno"]
-  okay_responses = ["okay", "ok", "awesome", "meh"]
+  okay_responses = ["okay", "ok", "awesome", "meh", "bleh"]
   bad_responses = ["bad", "sad", "angry", "mad", "depressed", "upset", "anxious"]
   if good_responses.include?(user_input.downcase)
     puts "Great to hear!"
@@ -83,48 +82,73 @@ end
 # end
 
 welcome
-sleep(2)
+sleep(1)
+puts "If you'd like to exit, put 'exit', otherwise press enter or anything else.."
 command_input = gets.chomp
 until command_input.downcase == "exit"
-  puts "Sorry it is Case-sensitive"
-  user_input = gets.chomp
+  command_line_list
   sleep(2)
-  if command_line_list == "1"
+  until command_input.downcase == "exit"
+    user_input = gets.chomp
+    sleep(2)
+  if user_input == "1"
+    puts "Sorry it is Case-sensitive"
     puts "Please enter an Episode name."
     user_input = gets.chomp
     Episode.find_episode_by_name(user_input)
-    sleep(5)
-  elsif command_line_list == "2"
+    sleep(4)
+  elsif user_input == "2"
     puts "Example: S01E01 "
+    puts "Sorry it is Case-sensitive"
     puts "Place Episode like the Example, Please"
     user_input = gets.chomp
     Episode.find_episode_by_episode(user_input)
-    sleep(5)
-  elsif command_line_list == "3"
+    sleep(4)
+  elsif user_input == "3"
+    puts "Sorry it is Case-sensitive"
+    puts "Please enter a name"
     user_input = gets.chomp
-
-  elsif command_line_list == "4"
+    Character.get_character_info_by_name(user_input)
+    sleep(4)
+  elsif user_input == "4"
+    puts "Sorry it is Case-sensitive"
+    puts "Please enter an Episode-name"
     user_input = gets.chomp
-  elsif command_line_list == "5"
+    Episode.find_characters_within_episode(user_input)
+    sleep(4)
+  elsif user_input == "5"
+    puts "Sorry it is Case-sensitive"
+    puts "Please enter a Character-name"
     user_input = gets.chomp
-  elsif command_line_list == "6"
-    user_input = gets.chomp
-  elsif command_line_list == "7"
-    user_input = gets.chomp
-  elsif command_line_list == "8"
+    Character.episodes_for_a_given_character(user_input)
+    sleep(4)
+  elsif user_input == "6"
+    Character.random_character
+    sleep(3)
+  elsif user_input == "7"
+    Episode.random_episode
+    sleep(3)
+  elsif user_input == "8"
     waba_lub_a_dub_dub
-  elsif command_line_list == "9"
+  elsif user_input == "9"
     puts "Are you sure you wanna leave?"
     sleep(1)
     gets.chomp
     puts "Come on! Please!!! Just stay for one more search!"
+    sleep(5)
+    puts "NOOOOOOOOOOOO!..."
+    sleep(3)
     break
+  elsif user_input.downcase == "menu"
+    command_line_list
   else
     puts "Can You Count? It needs to be one of the numbers provided..."
     sleep(1)
     puts "COME ON.. *blerg* MORTY!"
     sleep(4)
   end
+  end
+  break
 end
 # waba_lub_a_dub_dub
 # type_character_name
